@@ -1,6 +1,56 @@
 # Zeiss microscope OPMI S3 Control system development
 
-![Microscope Zeiss Opmi S3](https://i.ibb.co/zmnFYpp/IMG-20201019-WA0039.jpg)
+## ![Microscope Zeiss Opmi S3](https://i.ibb.co/zmnFYpp/IMG-20201019-WA0039.jpg)
+
+## Project description.
+
+In Vision Total S.A.S. A Zeiss microscope, model opmi S3, broke down. After an inspection, the internal cards of the equipment were found burnt and did not respond. These cards were difficult to obtain, so they hooked up with the clinic carrying out a project to control the motors using a logic controller, selected the STM32F103 for its small size, high performance and reliability, as well as PWM motor control and direction interface cards.
+The team did not take any action by pressing the pedal buttons and did not turn on the surgical light, however it did energize the circuits, so they began to put together the action plan for the project taking into account the desired behavior of the team and what was needed to make it functional.
+The ideal behavior of this microscope is that during surgeries, you can make movements of the entire optical assembly through which surgical procedures are being observed, in addition to having control over the zoom, focus and light intensity, for this makes use of a pedal _(Image 1)_, which includes different buttons for these functions, so the idea of ​​the project is to take the signals from this pedal to activate the motors that execute the designed tasks.
+![Image 1, microscope foot pedal](https://i.ibb.co/P41rrNk/foot-Pedal.png)
+For this purpose, some signals were taken to be replicated, described as follows:
+
+- Zoom up and down, with the possibility of changing the speed of the movement.
+- Raise and lower target focus with the possibility of changing the speed of movement.
+- Turn on/off surgical light.
+- Pressing the off button for more than 2.5 seconds lowers the light intensity to the minimum on level.
+- Pressing the power button for more than 2.5 seconds increases the intensity of the light to the maximum power level.
+- Movements up, down, left and right according to the movement of the joystick of the pedal, which moves the set of lenses in X and Y axes up to the maximum limit stops.
+- By pressing the centering button, bring the set of lenses in the X and Y axes to the center of their ranges of movement respectively.
+- Movement speed selection potentiometers on the body of the microscope.
+
+It was proposed to reuse the equipment's motors and take the signals from the limit switch sensors to emulate the control of the positioning of the lenses, the Zoom and the Focus that was originally carried out from the pedal, as well as the on/off of the light of surgery.
+
+---
+
+## Elements Used
+
+For this project I used a series of devices coupled to a controller, this is the list:
+
+- 2 STM32F103 Controllers.
+- 2 L298N DC motor drive modules with speed control and direction of rotation.
+- 8 career endings.
+- 4 meters of serial data bus (to carry signals).
+- 2 support boxes designed in 3D printers.
+- Dupont connectors for cables
+- 1 Cree Xlamp CXA MTG 24W LED with 12v driver.
+- 2 potentiometers of 100K ohm.
+
+In addition, a PC with STM Flash loader software is required to load the code in the STM, as well as tools to access the internal circuit of the microscope and modify it.
+
+---
+
+## Running and testing
+
+When programming the STM32F103, they were installed together with the new limit switches, replacing the old ones to avoid failures due to mechanical fatigue. In addition, the DC motors were rewired, replacing wiring with years of use, as well as the Potentiometers, and new cables were installed from the power strip. pedal connection to the control card.
+When installing the elements, proceed with the connection to the power source, which reused the original Zeiss source that fed the damaged control cards at 12 VDC, with this they began to measure the limit switch signals and verify than if they operated in the desired arm position.
+Having tested the previous signals and tested the motors, I proceeded to energize the new circuit to test the signals from the pedal without driving motors, so the DC motor controller modules were disconnected.
+With the signals already mapped and correctly connected to the corresponding STM32 inputs, I proceeded to connect the STM32 outputs to the already connected motor drivers and check that the motor movements are executed correctly.
+With many hot tests and motor reversals since there were poorly executed connections, I got the expected behavior of the control system.
+
+---
+
+## Spanish
 
 ## Descripción del proyecto.
 
@@ -21,6 +71,8 @@ Para este fin se tomaron unas señales a replicar, descritas así:
 
 Se propuso reutilizar los motores del equipo y tomar las señales de los sensores finales de carrera para emular el control de posicionamiento de los lentes, el Zoom y el Focus que se realizaba originalmente desde el pedal, así como el on/off de la luz de cirugía.
 
+---
+
 ## Elementos Utilizados
 
 Para este proyecto usé una serie de dispositivos acoplados a un controlador, este es el listado:
@@ -31,11 +83,12 @@ Para este proyecto usé una serie de dispositivos acoplados a un controlador, es
 - 4 metros de bus de datos serial(para transportar señales).
 - 2 cajas de soporte diseñadas en 3D printers.
 - Conectores dupont para cables
-- 1 módulo Driver Led de 36V de DC-DC a 12V.
-- 1 LED 24W a 6v
+- 1 LED Cree Xlamp CXA MTG 24W con driver de 12v.
 - 2 potenciometros de 100K ohm.
 
 Además se requiere de un PC con STM Flash loader software para cargar el código en los STM, además de herramientas para acceder al circuino interno del microscopio y modificarlo.
+
+---
 
 ## Ejecución y pruebas
 
@@ -44,3 +97,7 @@ Al instalar los elementos, se procede con la conexión a la fuente de poder, que
 Al tener las señales previas testeadas y los motores testeados, procedí a energizar el nuevo circuito para hacer testin de las señales desde el pedal sin accionamiento de motores, por lo que se desconectaron los módulos controladores de motor DC.
 Con las señales ya mapeadas y correctamente conectadas a las entradas del STM32 que le corresponden, procedí a conectar las salidas del STM32 a los drivers de motor ya conectado y revisar que los movimientos de los motores se ejecuten de forma correcta.
 Con muchas pruebas en caliente y con inversiones de giro de motores puesto que habían conexiones mal ejecutadas, conseguí el comportamiento esperado del sistema de control.
+Al comenzar a realizar pruebas con la luz LED de reemplazo a la original, se monta el LED con un disipador y un ventilador de 12v, además que se realiza en máquina 3D la carcasa para montaje en el microscopio, que contenga todos los elementos necesarios.
+Al mostrar al cliente una prueba piloto y su posible costo, este prefirió dejar el projecto sólo hasta la parte del control de los motores alegando que la luz que tenía original el microscopio le servía para los procedimientos quirúrgicos.
+
+---
