@@ -1,5 +1,6 @@
-const int pinPOTfocus = A7;
+#include <Arduino.h>
 const int pinPOTluz = A5;
+const int pinPOTfocus = A7;
 const int pinPWMfocus = 11; // conector J2 cable morado
 const int pinPOTzoom = A6; 
 const int pinPWMzoom = 6; // conector J2 cable rojo

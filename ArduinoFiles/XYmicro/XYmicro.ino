@@ -1,19 +1,20 @@
-const int pinIN3 = 11;
-const int pinIN4 = 12;
-const int pinTA3 = 2;
-const int pinArriba = 3;
-const int pinIzquierda = 4;
-const int pinTA1 = 5;
-const int pinAbajo = 6;
-const int pinTA4 = 7;
-const int pinTA2 = 8;
-const int pinDerecha = 9;
-const int pinBtnCentrar = 10;
-const int pinIN2 = 1;
-const int pinIN1 = 0;
-bool centrando=LOW;
+#include <Arduino.h>
 
- 
+const int pinIN3 = 11;        // salida para módulo de motor 2 IN3
+const int pinIN4 = 12;        // salida para módulo de motor 2 IN4
+const int pinTA3 = 2;         // entrada de final de carrera TA3 (eje por determinar)
+const int pinArriba = 3;      // Entrada de señal de pedal dirección arriba
+const int pinIzquierda = 4;   // Entrada de señal de pedal dirección Izquierda
+const int pinTA1 = 5;         // entrada de final de carrera TA1 (eje por determinar)
+const int pinAbajo = 6;       // Entrada de señal de pedal dirección abajo
+const int pinTA4 = 7;         // entrada de final de carrera TA2 (eje por determinar)
+const int pinTA2 = 8;         // entrada de final de carrera TA2 (eje por determinar)
+const int pinDerecha = 9;     // Entrada de señal de pedal dirección derecha
+const int pinBtnCentrar = 10; // Entrada de señal de botón de centrado
+const int pinIN2 = 1;         // salida para módulo de motor 1 IN2
+const int pinIN1 = 0;         // salida para módulo de motor 1 IN1
+bool centrando = LOW;
+
 void setup()
 {
   //Serial.begin(115200);
