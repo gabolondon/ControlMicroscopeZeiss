@@ -1,24 +1,24 @@
 #include <Arduino.h>
-const int pinPOTluz = A5;
+const int pinPOTluz = A4;
 const int pinPOTfocus = A7;
-const int pinPWMfocus = 11; // conector J2 cable morado
+const int pinPWMfocus = 5; // conector J2 cable morado
 const int pinPOTzoom = A6; 
-const int pinPWMzoom = 6; // conector J2 cable rojo
+const int pinPWMzoom = 3; // conector J2 cable rojo
 const int pinIN1 = 7;  // conector J2 cable cafe
 const int pinIN2 = 8; // conector J2 cable negro
 const int pinIN3 = 9; // conector J2 cable blanco
 const int pinIN4 = 10; // conector J2 cable gris
-const int pinZoomUP = 18; // cambiar cables para salida en A4
-const int pinZoomDown = 17; // cambiar cables para salida en A3
-const int pinFocusDown = 16;// cambiar cables para salida en A2
-const int pinFocusUp = 15;// cambiar cables para salida en A1
-const int pinLightUp = 4; // crear cables con conector J3
-const int pinLightDown = 5; // crear cables con conector J3
+const int pinZoomUP = A3; // cambiar cables para salida en A4
+const int pinZoomDown = A2; // cambiar cables para salida en A3
+const int pinFocusDown = A0;// cambiar cables para salida en A2
+const int pinFocusUp = A1;// cambiar cables para salida en A1
+const int pinLightUp = 6; // crear cables con conector J3
+const int pinLightDown = A5; // crear cables con conector J3
 const int pinLightPWM = 12;// crear cables con conector J3
-const int pinRelay = 3;    // control del relé
-const int pinLamp = 2;
+const int pinRelay = 4;    // control del relé
 
-unsigned long tiempoOn;
+
+unsigned long tiempoOn;     
 unsigned long tiempoOff;
 unsigned long timer = 1500;
 int valPWMfocus=0;
@@ -30,7 +30,7 @@ boolean botonUpPresionado = HIGH;
 boolean botonDownPresionado = HIGH;
 
 void setup() {
-  //Serial.begin(115200);
+  Serial.begin(115200);
   pinMode(pinPWMfocus, OUTPUT);
   pinMode(pinPWMzoom, OUTPUT);
   pinMode(pinLightPWM, OUTPUT);
@@ -165,7 +165,7 @@ void pararfocus(){
 }
 
 void LightOn(){
-  digitalWrite(pinRelay,HIGH);
+  digitalWrite(pinRelay,LOW);
   Serial.println("encendiendo luz");
   
 }
