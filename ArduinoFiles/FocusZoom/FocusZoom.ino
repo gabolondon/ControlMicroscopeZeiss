@@ -47,6 +47,7 @@ void setup() {
   pinMode(pinFocusDown, INPUT_PULLUP);
   pinMode(pinFocusUp, INPUT_PULLUP);
   pinMode(pinRelay, OUTPUT);
+  digitalWrite(pinRelay,HIGH);           //inicar apagado
   
 
 }
@@ -70,7 +71,7 @@ void loop() {
   //  modoLight = "pot";
   //}
   // if (modoLight == "pot"){
-  //  valPWMluz = map(analogRead(pinLightPWM), 0, 1023, 50, 255);  // convertir a valor PWM arrancando desde 100 porque los motores no aceptan bajos niveles de V
+  //  valPWMluz = map(analogRead(pinLightPWM), 0, 1023, 100, 255);  // convertir a valor PWM arrancando desde 100 porque los motores no aceptan bajos niveles de V
   //  Serial.print(" ; valor de PWM light: ");
   //  Serial.println(valPWMluz);
   //  analogWrite(pinLightPWM,valPWMluz);
@@ -106,6 +107,7 @@ void loop() {
   //  }
   // analogWrite(pinLightPWM,valPWMluz);
   //}
+
   if (digitalRead(pinLightUp) == LOW){
       LightOn();
   }
@@ -178,7 +180,7 @@ void pararfocus(){
 }
 
 void LightOn(){
-  digitalWrite(pinRelay, HIGH);
+  digitalWrite(pinRelay, LOW);
   Serial.println("encendiendo luz");
 }
 void LightOff(){
